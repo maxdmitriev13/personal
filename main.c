@@ -27,16 +27,11 @@ int main(int argc, char *argv[]) {
 	
 	double median_value;
 	if (NSIZE%2 == 1) {
-		int i = (((double)NSIZE/2)-0.5);
-		median_value = n[i];
+		median_value = n[NSIZE/2];
 		}
 	else {
-		median_value = (n[NSIZE / 2] + n[NSIZE / 2 -1] ) /2.0;
+		median_value = (n[NSIZE/2] + n[NSIZE/2 -1] ) /2.0;
 		}
 	printf("%.2f", median_value);
-		
-	
-	
-
 	return 0;
 }
