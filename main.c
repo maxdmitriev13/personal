@@ -1,22 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-	
 
-//банковское округление	
-int bankround(double number) {
-	int down = floor(number);
-	if (number - floor(number) == 0.5 )
-		return (down + abs(down%2));
-	else 
-		return round(number);
+//функция округляет число до указанного знака после запятой
+//round2(double, int)
+//round2(1.534, 2) = 1.53
+double round2(double number, int num) {
+    double factor = pow(10, num);
+    return round(number * factor) / factor;
 }
-
-int main(int argc, char *argv[]) {
-	
-	double number1 = 1.5, number2 = 2.5;
-	int result1 = bankround(number1), result2 = bankround(number2);
-	printf("result1 =  %d,result2 = %d\n", result1, result2);
-	return 0;
-}
-
