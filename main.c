@@ -5,9 +5,9 @@
 
 //банковское округление	
 int bankround(double number) {
-	double down = floor(number);
+	int down = floor(number);
 	if (number - floor(number) == 0.5 )
-		return (down + (int)down%2);
+		return (down + down%2);
 	else 
 		return round(number);
 }
