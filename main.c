@@ -1,30 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
-int compare_ints(const void* a, const void* b)
-{
-    int arg1 = *(const int*)a;
-    int arg2 = *(const int*)b;
-    if (arg1 < arg2) return -1;
-    if (arg1 > arg2) return 1;
-    return 0;
-
-}
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+/*int compareStrings(const void* p1, const void* p2) {
+	const char* s1 = (const char* )p1;
+	const char* s2 = (const char* )p2;
+	printf("compare %s %s\n", *s1, *s2);
+	return strcmp(s1, s2);
+	
+}*/
 
 int main(int argc, char *argv[]) {
-	#define NSIZE 10
-	int n[] = {18, 15, 17, 3, 21, 1000, 18, 30, 15, 17};
-	qsort(n, NSIZE, sizeof(int), compare_ints);
-		//print array
-	for (int i=0; i < NSIZE; i++)
-		printf("%-4d", n[i]);
-	puts("");
-	int count_v;
-	for (int i=0; i < NSIZE-1; i++)
-		if (n[i] == n[i+1]) {
-		count_v++;
+
+	// "Sergey,Andrey,Anna,Elena,Alex,Julia"
+	// Разместить имена в алфавитном порядке
+	// 1.Сделать массив строк с именами
+	// 2.Сортировать массив с помощью (qsort , ф-ция сравнения strcmp
+	// 3.Объединить массив строк в одну строку strcat  
+	char s[50] = "Sergey,Andrey,Anna,Elena,Alex,Julia";
+	char words[10][50];
+	int wordCount = 0;
+	
+	int len = strlen(s);
+	for( int i =0; i < len; i++){
+		if(isalpha(s[i])) {
+			int last = len;
+			for( int j = i +1; j < len; j++)
+				if (!isalpha(s[j])) {
+					last = j;
+					break;
+				}
+				strncpy(words[wordCount], &s[i], last - i);
+				words[wordCount][last-i] = '\0';
+				wordCount++;
+				i = last;
 		}
-	int uniq = NSIZE - count_v;
-	printf("Uniq elements : %d", uniq);
+	}
+	printf("wordcount: %d\n", wordCount);
+	qsort(words, wordCount, 50, strcmp);
+	for (int i = 0; i < wordCount; i++)
+	printf("'%s'\n",words[i]);
+	
+	char result[60] = {0};
+		for (int i = 0; i < wordCount; i++) {
+		strcat(result, words[i]);
+		if (i != wordCount-1)
+		strcat(result, ",");
+		}
+		puts(result);
+	
+	
 	return 0;
 }
