@@ -7,7 +7,7 @@
 int bankround(double number) {
 	int down = floor(number);
 	if (number - floor(number) == 0.5 )
-		return (down + down%2);
+		return (down + abs(down%2));
 	else 
 		return round(number);
 }
