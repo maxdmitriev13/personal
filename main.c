@@ -1,14 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+	
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+//банковское округление	
+int bankround(double number) {
+	double down = floor(number);
+	if (number - floor(number) == 0.5 )
+		return (down + (int)down%2);
+	else 
+		return round(number);
+}
 
 int main(int argc, char *argv[]) {
-	system("chcp 65001 > nul"); //utf-8
-	printf("Введите температуру в градусах Цельсия: ");
-	double temp_c;
-	scanf("%lf", &temp_c);
-	double temp_f = temp_c * 1.8 + 32;
-	printf("Температура в градусах Фарингейта: %.3lf", temp_f);	
+	
+	double number1 = 1.5, number2 = 2.5;
+	int result1 = bankround(number1), result2 = bankround(number2);
+	printf("result1 =  %d,result2 = %d\n", result1, result2);
 	return 0;
 }
+
